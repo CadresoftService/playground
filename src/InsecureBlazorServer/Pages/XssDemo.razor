@@ -1,0 +1,21 @@
+@page "/xss-demo"
+@using Microsoft.AspNetCore.Components
+
+<h2>XSS Demo (Intentionally Unsafe)</h2>
+
+<p>
+  This page renders the <code>msg</code> query string as raw HTML using <code>MarkupString</code>.
+  Do not do this in real apps.
+</p>
+
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public string? Msg { get; set; }
+
+    private MarkupString UnsafeHtml => new MarkupString(Msg ?? "<i>(no msg provided)</i>");
+}
+
+<div class="card">
+  <h3>Rendered output:</h3>
+  <div>@UnsafeHtml</div>
+</div>

@@ -1,0 +1,30 @@
+@page "/links"
+@inject NavigationManager Nav
+@using Microsoft.AspNetCore.Components
+
+<h2>Redirect Demo (Intentionally Unsafe)</h2>
+
+<p>
+  This page accepts a <code>next</code> query parameter and navigates to it without validation.
+</p>
+
+<input style="width: 100%" @bind="Next" />
+<button @onclick="Go">Go</button>
+
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public string? NextParam { get; set; }
+
+    private string Next { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        Next = NextParam ?? "https://example.com";
+    }
+
+    private void Go()
+    {
+        // open redirect / unvalidated redirect (intentionally unsafe)
+        Nav.NavigateTo(Next, forceLoad: true);
+    }
+}
