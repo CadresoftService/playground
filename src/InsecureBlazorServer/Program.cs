@@ -1,4 +1,3 @@
-\
 /*
   Intentionally insecure demo app for GHAS/CodeQL training.
   Do NOT deploy. Do NOT expose to the internet.
